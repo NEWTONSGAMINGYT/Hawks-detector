@@ -61,6 +61,9 @@ export const patternConfig = {
                 },
                 function (node, nodeOld) {
                   return /\s*(?:limited time deal?|deal of the day)/i.test(node.textContent || '');
+                },
+                function (node, nodeOld) {
+                  return /\d+\s*(?:left)/i.test(node.textContent || '');
                 }
             ],
             infoUrl: brw.i18n.getMessage("patternScarcity_infoUrl"),
@@ -77,7 +80,7 @@ export const patternConfig = {
                     return /\d+\s*(?:other)?\s*(?:customers?|clients?|buyers?|users?|shoppers?|purchasers?|people)\s*(?:have\s+)?\s*(?:(?:also\s*)?(?:bought|purchased|ordered)|(?:rated|reviewed))\s*(?:this|the\s*following)\s*(?:product|article|item)s?/i.test(node.innerText);
                 },
                 function (node, nodeOld) {
-                    return /\d+\s*(?:andere)?\s*(?:Kunden?|Käufer|Besteller|Nutzer|Leute|Person(?:en)?)(?:(?:\s*\/\s*)?[_\-\*]?innen)?\s*(?:(?:kauften|bestellten|haben)\s*(?:auch|ebenfalls)?|(?:bewerteten|rezensierten))\s*(?:diese[ns]?|(?:den|die|das)?\s*folgenden?)\s*(?:Produkte?|Artikel)/i.test(node.innerText);
+                  return /\s*(?:bought?|past month)/i.test(node.textContent || '');
                 }
             ],
             infoUrl: brw.i18n.getMessage("patternSocialProof_infoUrl"),
@@ -134,7 +137,72 @@ export const patternConfig = {
             languages: [
                 "en"
             ]
-        }
+        },
+
+        {
+            
+            name: brw.i18n.getMessage("patternDisguisedAds_name"),
+            className: "Disguised",
+            detectionFunctions: [
+                function (node, nodeOld) {
+                  return /\s*(?:zzzzzzzzzzzzzzzzz)/i.test(node.textContent || '');
+                }
+            ],
+            infoUrl: brw.i18n.getMessage("patternScarcity_infoUrl"),
+            info: brw.i18n.getMessage("patternScarcity_info"),
+            languages: [
+                "en"
+            ]
+        },
+
+        {
+            name: brw.i18n.getMessage("patternConfirmShaming_name"),
+            className: "ConfirmShaming",
+            detectionFunctions: [
+                function (node, nodeOld) {
+                  return /\s*(?:subscribe to?|unsubscribe?|no,thanks)/i.test(node.textContent || '');
+                }
+            ],
+            infoUrl: brw.i18n.getMessage("patternScarcity_infoUrl"),
+            info: brw.i18n.getMessage("patternScarcity_info"),
+            languages: [
+                "en"
+            ]
+        },
+        {
+            
+            name: brw.i18n.getMessage("patternHiddenCost_name"),
+            className: "HiddenCost",
+            detectionFunctions: [
+                function (node, nodeOld) {
+                  return /\s*(?:offer price?|cancellation fee?|convenience fee?|convenience charge)/i.test(node.textContent || '');
+                }
+            ],
+            infoUrl: brw.i18n.getMessage("patternScarcity_infoUrl"),
+            info: brw.i18n.getMessage("patternScarcity_info"),
+            languages: [
+                "en"
+            ]
+        },
+        {
+            
+            name: brw.i18n.getMessage("patternMisdirection_name"),
+            className: "Misdirection",
+            detectionFunctions: [
+                function (node, nodeOld) {
+
+                    return /\d+\s*(?:\%|pieces?|pcs\.?|pc\.?|ct\.?|items?)?\s*(?:available|sold|claimed|redeemed)|(?:last|final)\s*(?:article|item)/i.test(node.innerText);
+                },
+                function (node, nodeOld) {
+                  return /\s*(?:sponsored?|bestseller?|flipkart's choice)/i.test(node.textContent || '');
+                }
+            ],
+            infoUrl: brw.i18n.getMessage("patternScarcity_infoUrl"),
+            info: brw.i18n.getMessage("patternScarcity_info"),
+            languages: [
+                "en"
+            ]
+        },
     ]
 }
 
