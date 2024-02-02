@@ -1,6 +1,6 @@
 {
   "extName": {
-    "message": "Hawks Detector",
+    "message": "Hawk's Detector",
     "description": "The name of the extension."
   },
   "extDescription": {
@@ -20,23 +20,23 @@
     "description": "The message when the switch is turned off in the popup."
   },
   "buttonReloadPageForChange": {
-    "message": "Refresh page to apply changes",
+    "message": "Reload Page To Apply Changes",
     "description": "Text for the button to reload the page after a changed activation state."
   },
   "buttonRedoPatternCheck": {
-    "message": "Repeat pattern highlighting",
+    "message": "Repeat Dark Pattern Highlighting",
     "description": "Text for the button to repeat the pattern highlighting on the page."
   },
   "headingShowPattern": {
-    "message": "Show patterns",
+    "message": "Show Patterns",
     "description": "Heading in the popup for the buttons to show individual pattern elements."
   },
   "headingFoundPatterns": {
-    "message": "Patterns found",
+    "message": "Total Patterns Found",
     "description": "Heading in the popup for the list of found patterns."
   },
   "headingSupportedPatterns": {
-    "message": "Supported pattern types",
+    "message": "Supported Pattern Types",
     "description": "Heading in the popup for the list of supported patterns."
   },
   "textMoreInformation": {
@@ -65,6 +65,10 @@
     "message": "Countdown",
     "description": "Name of the countdown pattern."
   },
+  "patternCountdown_w": {
+    "message": "Beware of false urgency tactics. Take your time; true deals don't expire in seconds.",
+    "description": "Name of the countdown pattern."
+  },
   "patternCountdown_infoUrl": {
     "message": "https://github.com/NEWTONSGAMINGYT/Hawks-detector",
     "description": "URL to the explanation of the countdown pattern on the Github website."
@@ -75,6 +79,10 @@
   },
   "patternScarcity_name": {
     "message": "Scarcity",
+    "description": "Name of the scarcity pattern."
+  },
+  "patternScarcity_w": {
+    "message": "Caution! False scarcity may pressure you into unnecessary purchases. Evaluate your needs.",
     "description": "Name of the scarcity pattern."
   },
   "patternScarcity_infoUrl": {
@@ -89,6 +97,10 @@
     "message": "Social Proof",
     "description": "Name of the social proof pattern."
   },
+  "patternSocialProof_w": {
+    "message": "Watch out for manipulated social proof. Not all recommendations are genuine.",
+    "description": "Name of the social proof pattern."
+  },
   "patternSocialProof_infoUrl": {
     "message": "https://github.com/NEWTONSGAMINGYT/Hawks-detector",
     "description": "URL to the explanation of the social proof pattern on the Github website."
@@ -101,6 +113,10 @@
     "message": "Forced Continuity",
     "description": "Name of the forced continuity pattern."
   },
+  "patternForcedContinuity_w": {
+    "message": "Stay alert! Automatic subscriptions can lock you into unwanted payments.",
+    "description": "Name of the forced continuity pattern."
+  },
   "patternForcedContinuity_infoUrl": {
     "message": "https://github.com/NEWTONSGAMINGYT/Hawks-detector",
     "description": "URL to the explanation of the forced continuity pattern on the Github website."
@@ -109,6 +125,40 @@
     "message": "The Forced Continuity pattern automatically renews free or low-cost trial subscriptions - but for a fee or at a higher price. The design trick is that the order form visually suggests that there is no charge and conceals the (automatic) follow-up costs.",
     "description": "Brief explanation of the forced continuity Pattern."
   },
+
+  "patternDisguisedAds_name": {
+    "message": "Disguised Ads",
+    "description": "Name of the forced continuity pattern."
+  },
+  "patternDisguisedAds_w": {
+    "message": "Don't be tricked! Content may serve hidden agendas rather than your interests.",
+    "description": "Name of the forced continuity pattern."
+  },
+  "patternConfirmShaming_name": {
+    "message": "ConfirmShaming",
+    "description": "Name of the forced continuity pattern."
+  },
+  "patternConfirmShaming_w": {
+    "message": "Don't be manipulated! Reject guilt-inducing tactics aimed at coercing decisions.",
+    "description": "Name of the forced continuity pattern."
+  },
+  "patternHiddenCost_name": {
+    "message": "Hidden Cost",
+    "description": "Name of the forced continuity pattern."
+  },
+  "patternHiddenCost_w": {
+    "message": "Beware of hidden fees! What seems cheap upfront may cost you dearly later.",
+    "description": "Name of the forced continuity pattern."
+  },
+  "patternMisdirection_name": {
+    "message": "Misdirection",
+    "description": "Name of the forced continuity pattern."
+  },
+  "patternMisdirection_w": {
+    "message": "Stay focused! Misdirection tactics aim to distract you from the truth.",
+    "description": "Name of the forced continuity pattern."
+  },
+
   "showPatternState": {
     "message": "$CURRENT$ of $TOTAL$",
     "description": "Display the number of the current pattern in the popup for the 'Show patterns' function.",
