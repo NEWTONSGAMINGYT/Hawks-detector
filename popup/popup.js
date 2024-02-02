@@ -5,7 +5,7 @@ import { onOffSwitchStyles, sharedStyles, actionButtonStyles, patternsListStyles
 
 
 const brw = chrome;
-
+let www;
 document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('closeButton').addEventListener('click', function() {
         window.close(); 
@@ -88,8 +88,10 @@ export class ExtensionPopup extends LitElement {
             <redo-button .activation=${this.initActivation}></redo-button>
             <found-patterns-list .activation=${this.initActivation} .results=${this.results}></found-patterns-list>
             <show-pattern-button .activation=${this.initActivation} .results=${this.results}></show-pattern-button>
+            <pattern-warning .activation=${this.initActivation} .results=${this.results}></pattern-warning>
             <supported-patterns-list></supported-patterns-list>
             <popup-footer></popup-footer>
+            <authors-s></authors-s>
         `;
     }
 }
@@ -108,7 +110,7 @@ export class PopupHeader extends LitElement {
 
     render() {
         return html`
-        <h1>${brw.i18n.getMessage("extName")}</h1>
+        <h1 style="color:white;">${brw.i18n.getMessage("extName")}</h1>
         ${!constants.patternConfigIsValid ?
                 html`<h3>${brw.i18n.getMessage("errorInvalidConfig")}<h3>` : html``}
       `;
@@ -186,7 +188,7 @@ export class RefreshButton extends LitElement {
         }
         return html`
         <div>
-            <span @click=${this.refreshTab}>${brw.i18n.getMessage("buttonReloadPageForChange")}</span>
+            <span @click=${this.refreshTab} style="color:white;">${brw.i18n.getMessage("buttonReloadPageForChange")}</span>
         </div>
         `;
     }
@@ -217,7 +219,7 @@ export class RedoButton extends LitElement {
         }
         return html`
         <div>
-            <span @click=${this.redoPatternCheck}>${brw.i18n.getMessage("buttonRedoPatternCheck")}</span>
+            <span @click=${this.redoPatternCheck} style="color:white;">${brw.i18n.getMessage("buttonRedoPatternCheck")}</span>
         </div>
       `;
     }
@@ -243,8 +245,8 @@ export class FoundPatternsList extends LitElement {
         }
         return html`
         <div>
-            <h2>${brw.i18n.getMessage("headingFoundPatterns")}</h2>
-            <h2 style="color: ${this.results.countVisible ? "red" : "green"}">${this.results.countVisible}</h2>
+            <h2 style="color:white;">${brw.i18n.getMessage("headingFoundPatterns")}</h2>
+            <h2 style="color: ${this.results.countVisible ? "#ba3e01" : "green"}">${this.results.countVisible}</h2>
             <ul>
                 ${this.results.patterns?.map((pattern) => {
             let currentPatternInfo = constants.patternConfig.patterns.find(p => p.name === pattern.name);
@@ -252,8 +254,8 @@ export class FoundPatternsList extends LitElement {
                 return html``;
             }
             return html`
-                    <li title="${currentPatternInfo.info}">
-                        <a href="${currentPatternInfo.infoUrl}" target="_blank">${pattern.name}</a>: ${pattern.elementsVisible.length}
+                    <li style="color:white;" title="${currentPatternInfo.info}">
+                        <a style="color:white;" href="${currentPatternInfo.infoUrl}" target="_blank">${pattern.name}</a>: ${pattern.elementsVisible.length}
                     </li>`;
         })}
             </ul>
@@ -361,9 +363,10 @@ export class ShowPatternButtons extends LitElement {
 
             if (idx !== -1) {
                 let currentPatternInfo = constants.patternConfig.patterns.find(p => p.name === this._visiblePatterns[idx].patternName);
+                www=this._visiblePatterns[idx].patternName;
                 return html`
-                    <h3 title="${currentPatternInfo.info}">
-                        <a href="${currentPatternInfo.infoUrl}" target="_blank">${this._visiblePatterns[idx].patternName}</a>
+                    <h3 style="color:white;">
+                        ${this._visiblePatterns[idx].patternName}
                     </h3>`;
             }
         }
@@ -392,14 +395,15 @@ export class ShowPatternButtons extends LitElement {
         if (this.activation !== activationState.On || this.results.countVisible === 0) {
             return html``;
         }
-
+        //www=this.getCurrentPatternText();
         return html`
         <div>
-            <h2>${brw.i18n.getMessage("headingShowPattern")}</h2>
-            <span class="button" @click=${this.showPreviousPattern}>⏮️</span>
-            <span>${brw.i18n.getMessage("showPatternState", [this.getCurrentPatternNumber(), this.results.countVisible.toString()])}</span>
-            <span class="button" @click=${this.showNextPattern}>⏭️</span>
+            <h2 style="color:white;">${brw.i18n.getMessage("headingShowPattern")}</h2>
+            <span class="button" @click=${this.showPreviousPattern}><img src="../images/previous-24.png"></img></span>
+            <span style="color:white; font-size:24px;">${brw.i18n.getMessage("showPatternState", [this.getCurrentPatternNumber(), this.results.countVisible.toString()])}</span>
+            <span class="button" @click=${this.showNextPattern}><img src="../images/next-24.png"></img></span>
             ${this.getCurrentPatternText()}
+
         </div>
       `;
     }
@@ -414,7 +418,19 @@ export class SupportedPatternsList extends LitElement {
         patternsListStyles,
         patternLinkStyles,
         css`
+             .container {
+              display: grid;
+              grid-template-columns: repeat(2, 1fr);
+              grid-gap: 10px;
+            }
+
+            .item {
+              background-color: #f0f0f0;
+              padding: 20px;
+              border: 1px solid #ccc;
+            }
             div {
+                border: 1px solid white;
                 margin: 2.5em 0 1em;
             }
         `
@@ -424,17 +440,25 @@ export class SupportedPatternsList extends LitElement {
     render() {
         return html`
         <div>
-            <h2>${brw.i18n.getMessage("headingSupportedPatterns")}</h2>
-            <ul>
-                ${constants.patternConfig.patterns.map((pattern) =>
-            html`
-                    <li title="${pattern.info}">
-                        <a href="${pattern.infoUrl}" target="_blank">
-                            ${pattern.name} (${pattern.languages.map(l => l.toUpperCase()).join(", ")})
-                        </a>
-                    </li>`
-        )}
-            </ul>
+            <h2 style="color:white;">${brw.i18n.getMessage("headingSupportedPatterns")}</h2>
+            <table style="width:100%; color:white; text-align:left; margin-left:50px; padding:5px">
+        <tr>
+            <td>${brw.i18n.getMessage("patternCountdown_name")}</td>
+            <td>${brw.i18n.getMessage("patternScarcity_name")}</td>
+        </tr>
+        <tr>
+            <td>${brw.i18n.getMessage("patternSocialProof_name")}</td>
+            <td>${brw.i18n.getMessage("patternForcedContinuity_name")}</td>
+        </tr>
+        <tr>
+            <td>${brw.i18n.getMessage("patternDisguisedAds_name")}</td>
+            <td>${brw.i18n.getMessage("patternConfirmShaming_name")}</td>
+        </tr>
+        <tr>
+            <td>${brw.i18n.getMessage("patternHiddenCost_name")}</td>
+            <td>${brw.i18n.getMessage("patternMisdirection_name")}</td>
+        </tr>
+    </table>
         </div>
       `;
     }
@@ -456,10 +480,79 @@ export class PopupFooter extends LitElement {
     
     render() {
         return html`
-        <div>
-            ${brw.i18n.getMessage("textMoreInformation")}: <a href="https://dapde.de/" target="_blank">Click Here</a>.
+        <div style="color:white;">
+            ${brw.i18n.getMessage("textMoreInformation")}: <a href="https://github.com/NEWTONSGAMINGYT/Hawks-detector" target="_blank">Click Here</a>.
         </div>
       `;
     }
 }
 customElements.define("popup-footer", PopupFooter);
+
+
+export class authors extends LitElement {
+
+    
+    render() {
+        return html`
+        <div style="margin:0px; border: 1px solid white;">
+            <h2 style="color:white;">Developers: Smriti, Kritarth, Aryan, Abhinav, Shubham</h2>
+        </div>
+      `;
+    }
+}
+customElements.define("authors-s", authors);
+
+export class pw extends LitElement {
+    static properties = {
+        activation: { type: Number },
+        results: { type: Object }
+    };
+
+    
+    render() {
+        if (this.activation !== activationState.On || this.results.countVisible === 0) {
+            return html``;
+        }
+        if(www=="Hidden Cost"){
+        return html`
+        <div style="margin:0px; border: 1px solid white;">
+            <h3 style="color:red;font-size:15px; ">${brw.i18n.getMessage("patternHiddenCost_w")}</h3>
+        </div>
+
+      `;
+      }
+      if(www=="Scarcity"){
+        return html`
+        <div style="margin:0px; border: 1px solid white;">
+            <h3 style="color:red;font-size:15px; ">${brw.i18n.getMessage("patternScarcity_w")}</h3>
+        </div>
+
+      `;
+      }
+      if(www=="Social Proof"){
+        return html`
+        <div style="margin:0px; border: 1px solid white;">
+            <h3 style="color:red;font-size:15px; ">${brw.i18n.getMessage("patternSocialProof_w")}</h3>
+        </div>
+
+      `;
+      }
+      if(www=="Misdirection"){
+        return html`
+        <div style="margin:0px; border: 1px solid white;">
+            <h3 style="color:red;font-size:15px; ">${brw.i18n.getMessage("patternMisdirection_w")}</h3>
+        </div>
+
+      `;
+      }
+      if(www=="ConfirmShaming"){
+        return html`
+        <div style="margin:0px; border: 1px solid white;">
+            <h3 style="color:red;font-size:15px; ">${brw.i18n.getMessage("patternConfirmShaming_w")}</h3>
+        </div>
+
+      `;
+      }
+    }
+}
+customElements.define("pattern-warning", pw);
